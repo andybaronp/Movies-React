@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./MovieCard.module.css";
 import { BiStar } from "react-icons/bi";
+
+import { getMovieImg } from "../../utils/getMovieImg";
 const MovieCard = ({ movie }) => {
-  const imgUrl = "https://image.tmdb.org/t/p/w300" + movie.poster_path;
+  const imgUrl = getMovieImg(movie.poster_path, 300);
   return (
     <li className={styles.movieCard}>
       <Link to={`/movie/${movie.id}`}>

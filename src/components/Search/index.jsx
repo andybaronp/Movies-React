@@ -5,7 +5,6 @@ import { useQuery } from "../../hooks/useQuery";
 const Search = () => {
   const query = useQuery();
   const search = query.get("search");
-
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -21,13 +20,11 @@ const Search = () => {
           value={search}
           onChange={(e) => {
             const value = e.target.value;
-
             navigate(`/?search=${value}`);
           }}
         />
-        <button type="submit" className={style.searchButton}>
-          <MdScreenSearchDesktop />
-        </button>
+
+        <MdScreenSearchDesktop className={style.searchButton} />
       </div>
     </form>
   );

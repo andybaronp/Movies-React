@@ -4,13 +4,13 @@ import { Spinner } from "../../components/Spinner";
 import { getData } from "../../utils/fetch";
 import style from "./MovieDetails.module.css";
 import { BiStar } from "react-icons/bi";
+import { getMovieImg } from "../../utils/getMovieImg";
 
 const MoviesDatails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const imgUrl = `https://image.tmdb.org/t/p/w300/${movie.poster_path}`;
-
+  const imgUrl = getMovieImg(movie.poster_path, 300);
   useEffect(() => {
     setIsLoading(true);
     getData(`/movie/${id}`).then((data) => {

@@ -4,6 +4,7 @@ import { getData } from "../../utils/fetch";
 import styles from "./MoviesGrid.module.css";
 import { Spinner } from "../Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Empty } from "../Empty";
 const MoviesGrid = ({ search }) => {
   const [movies, setMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,14 +19,16 @@ const MoviesGrid = ({ search }) => {
       ? "/search/movie?query=" + search + "&page=" + page
       : "/discover/movie?page=" + page;
     getData(searchUrl).then((data) => {
-      console.log(data);
       setMovie((prevMovie) => prevMovie.concat(data.results));
       setHasMore(data.page < data.total_pages);
-
       setIsLoading(false);
     });
   }, [search, page]);
-  console.log(hasMore);
+
+  if (!isLoading && movies.length === 0) {
+    return <Empty />;
+  }
+
   return (
     <InfiniteScroll
       dataLength={movies.length}
