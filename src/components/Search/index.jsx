@@ -1,21 +1,15 @@
 import style from "./Search.module.css";
 import { MdScreenSearchDesktop } from "react-icons/md";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "../../hooks/useQuery";
 const Search = () => {
   const query = useQuery();
   const search = query.get("search");
-  const [searchText, setSearchText] = useState("");
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    setSearchText(search || "");
-  }, [search]);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/?search=${searchText}`);
   };
   return (
     <form className={style.searchContainer} onSubmit={handleSubmit}>
@@ -24,8 +18,12 @@ const Search = () => {
           type="text"
           className={style.searchInput}
           placeholder="Search movies"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          value={search}
+          onChange={(e) => {
+            const value = e.target.value;
+
+            navigate(`/?search=${value}`);
+          }}
         />
         <button type="submit" className={style.searchButton}>
           <MdScreenSearchDesktop />
