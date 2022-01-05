@@ -1,11 +1,10 @@
 import style from "./Search.module.css";
 import { MdScreenSearchDesktop } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
-import { useQuery } from "../../hooks/useQuery";
+import { useSearchParams } from "react-router-dom";
 const Search = () => {
-  const query = useQuery();
+  const [query, setQuery] = useSearchParams();
   const search = query.get("search");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +19,8 @@ const Search = () => {
           value={search}
           onChange={(e) => {
             const value = e.target.value;
-            navigate(`/?search=${value}`);
+            setQuery({ search: value });
+            // navigate(`/?search=${value}`);
           }}
         />
 
