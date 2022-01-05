@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 const Search = () => {
   const [query, setQuery] = useSearchParams();
   const search = query.get("search");
-  // const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +19,6 @@ const Search = () => {
           onChange={(e) => {
             const value = e.target.value;
             setQuery({ search: value });
-            // navigate(`/?search=${value}`);
           }}
         />
 
